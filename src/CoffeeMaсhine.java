@@ -6,13 +6,13 @@ public class CoffeeMaсhine {
     public static final double VOLUME_FOR_MILK = 0.600;
     public static final double VOLUME_FOR_WATER = 1.700;
 
+    public static double beans = VOLUME_FOR_BEANS;
+    public static double milk = VOLUME_FOR_MILK;
+    public static double water = VOLUME_FOR_WATER;
+
     public static final double MIN_BEANS_FOR_ONE_PORTION = 0.025;
     public static final double MIN_MILK_FOR_ONE_PORTION = 0.080;
     public static final double MIN_WATER_FOR_ONE_PORTION = 0.150;
-
-    private double beans = VOLUME_FOR_BEANS;
-    private double milk = VOLUME_FOR_MILK;
-    private double water = VOLUME_FOR_WATER;
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -30,15 +30,7 @@ public class CoffeeMaсhine {
         }
     }
 
-    public double getBeans() {return beans;}
-    public double getMilk() {return milk;}
-    public double getWater() {return water;}
-
-    public void setBeans(double beans) {this.beans = beans;}
-    public void setMilk(double milk) {this.milk = milk;}
-    public void setWater(double water) {this.water = water;}
-
-    public void printLoadingOfMakingToCoffee() throws InterruptedException {
+    public void printLoading() throws InterruptedException {
         System.out.println("");
         for (int i = 10; i <= 100; i+=10) {
             System.out.print(i + "%");
@@ -47,7 +39,7 @@ public class CoffeeMaсhine {
         System.out.println("");
     }
 
-    public void printLoadingOfChangingToIngredients() throws InterruptedException {
+    public void printLoading2() throws InterruptedException {
         System.out.println("");
         for (int i = 10; i <= 100; i+=10) {
             System.out.print("-");
@@ -56,15 +48,19 @@ public class CoffeeMaсhine {
         System.out.println("");
     }
 
+    public void printNeedIngredient(double ingredient){
+        System.out.println("Not enough " + ingredient + ". Please, wait 1 minute.");
+    }
+
     public boolean checkIngredients(){
-        if(getBeans() < MIN_BEANS_FOR_ONE_PORTION){
-            System.out.println("Not enough beans. Please, wait 1 minute.");
+        if(beans < MIN_BEANS_FOR_ONE_PORTION){
+           printNeedIngredient(beans);
             return (true);
-        }else if (getMilk() < MIN_MILK_FOR_ONE_PORTION){
-            System.out.println("Not enough milk. Please, wait 1 minute.");
+        }else if (milk < MIN_MILK_FOR_ONE_PORTION){
+            printNeedIngredient(milk);
             return (true);
-        }else if (getWater() < MIN_WATER_FOR_ONE_PORTION){
-            System.out.println("Not enough water. Please, wait 1 minute.");
+        }else if (water < MIN_WATER_FOR_ONE_PORTION){
+            printNeedIngredient(water);
             return (true);
         }else{
             return (false);
@@ -72,12 +68,12 @@ public class CoffeeMaсhine {
     }
 
     public void addIngredientsToCoffeeMachine(){
-        if (getBeans() < MIN_BEANS_FOR_ONE_PORTION) {
-            setBeans(VOLUME_FOR_BEANS);
-        }else if (getMilk() < MIN_MILK_FOR_ONE_PORTION) {
-            setMilk(VOLUME_FOR_MILK);
-        }else if (getWater() < MIN_WATER_FOR_ONE_PORTION) {
-            setWater(VOLUME_FOR_WATER);
+        if (beans < MIN_BEANS_FOR_ONE_PORTION) {
+            beans = VOLUME_FOR_BEANS;
+        }else if (milk < MIN_MILK_FOR_ONE_PORTION) {
+            milk = VOLUME_FOR_MILK;
+        }else if (water < MIN_WATER_FOR_ONE_PORTION) {
+            water = VOLUME_FOR_WATER;
         }else {
             System.out.println("Ingredients are enough.");
         }
@@ -107,16 +103,16 @@ public class CoffeeMaсhine {
     public void makeCappuccino() throws InterruptedException {
         if (checkIngredients()) {
             addIngredientsToCoffeeMachine();
-            printLoadingOfChangingToIngredients();
+            printLoading2();
             System.out.println("Thank you! Try again.");
         }else {
             deductIngredientsForCappuccino();
         System.out.println("\n" + "Cappuccino is making..." + "\n");
-        printLoadingOfMakingToCoffee();
+        printLoading();
         System.out.println("Cappuccino is done!"+ "\n");
-            System.out.println(getBeans());
-            System.out.println(getMilk());
-            System.out.println(getWater());
+            System.out.println(beans);
+            System.out.println(milk);
+            System.out.println(water);
     }
     }
 }
