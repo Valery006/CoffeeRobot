@@ -31,25 +31,24 @@ public class CoffeeMaсhine {
     }
 
     public void printLoading() throws InterruptedException {
-        System.out.println("");
+        System.out.println("\n" + "Cappuccino is making...");
         for (int i = 10; i <= 100; i+=10) {
             System.out.print(i + "%");
             Thread.sleep(250);
         }
-        System.out.println("");
+        System.out.println("\n" + "Cappuccino is done!");
     }
 
     public void printLoading2() throws InterruptedException {
-        System.out.println("");
         for (int i = 10; i <= 100; i+=10) {
             System.out.print("-");
             Thread.sleep(500);
         }
-        System.out.println("");
+        System.out.println("\n" + "Thank you! Try again.");
     }
 
     public void printNeedIngredient(double ingredient){
-        System.out.println("Not enough " + ingredient + ". Please, wait 1 minute.");
+        System.out.println("\n" + "Not enough " + ingredient + ". Please, wait 1 minute.");
     }
 
     public boolean checkIngredients(){
@@ -104,12 +103,9 @@ public class CoffeeMaсhine {
         if (checkIngredients()) {
             addIngredientsToCoffeeMachine();
             printLoading2();
-            System.out.println("Thank you! Try again.");
         }else {
             deductIngredientsForCappuccino();
-        System.out.println("\n" + "Cappuccino is making..." + "\n");
-        printLoading();
-        System.out.println("Cappuccino is done!"+ "\n");
+            printLoading();
             System.out.println(beans);
             System.out.println(milk);
             System.out.println(water);
