@@ -10,84 +10,262 @@ public class CoffeeMaсhine {
     public static double milk = VOLUME_FOR_MILK;
     public static double water = VOLUME_FOR_WATER;
 
-    public static final double MIN_BEANS_FOR_ONE_PORTION = 0.025;
-    public static final double MIN_MILK_FOR_ONE_PORTION = 0.080;
-    public static final double MIN_WATER_FOR_ONE_PORTION = 0.150;
+    public static String cappuccino = "Cappuccino";
+    public static String mocaccino = "Mocaccino";
+    public static String latte = "Latte";
+    public static String espresso = "Espresso";
 
     public static void main(String[] args) throws InterruptedException {
 
-        Scanner scanner = new Scanner(System.in);
         CoffeeMaсhine coffeeMaсhine = new CoffeeMaсhine();
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
+
+            coffeeMaсhine.printMenu();
             String clientPick = scanner.nextLine();
+
             if (clientPick.equals("1")) {
-                coffeeMaсhine.makeCappuccino();
-            }
-            else {
-                System.out.println("Your pick is not correct.");
+              coffeeMaсhine.makeCappuccino();
+            } else if (clientPick.equals("2")) {
+                coffeeMaсhine.makeMocaccino();
+            } else if (clientPick.equals("3")) {
+                coffeeMaсhine.makeLatte();
+            } else if (clientPick.equals("4")) {
+                coffeeMaсhine.makeEspresso();
+            } else {
+                System.out.println("Enter the correct number.");
             }
         }
     }
-
-    public void printLoading() throws InterruptedException {
-        System.out.println("\n" + "Cappuccino is making..." + "\n");
-        for (int i = 10; i <= 100; i+=10) {
+    public void printMenu() {
+        System.out.println("> 1 < " + cappuccino);
+        System.out.println("> 2 < " + mocaccino);
+        System.out.println("> 3 < " + latte);
+        System.out.println("> 4 < " + espresso);
+    }
+    public void printLoading(String coffee) throws InterruptedException {
+        System.out.println("\n" + "" + coffee + " is making..." + "\n");
+        for (int i = 10; i <= 100; i += 10) {
             System.out.print(i + "%");
             Thread.sleep(250);
         }
-        System.out.println("\n" + "Cappuccino is done!" + "\n");
+        System.out.println("\n" + "" + coffee + " is done!" + "\n");
     }
 
     public void printLoading2() throws InterruptedException {
-        for (int i = 10; i <= 100; i+=10) {
+        for (int i = 10; i <= 100; i += 10) {
             System.out.print("-");
             Thread.sleep(500);
         }
         System.out.println("\n" + "Thank you! Try again.");
     }
 
-    public void printNeedIngredient(double ingredient){
-        System.out.println("\n" + "Not enough " + ingredient + ". Please, wait 1 minute.");
+    public void printNeedIngredients() {
+        System.out.println("\n" + "Not enough ingredients, please, wait 1 minute.");
+    }
+    public void printIngredients(){
+        System.out.println("Зёрна " + beans + " Молоко " + milk + " Вода " + water + "\n");
     }
 
-    public boolean checkIngredients(){
-        if(beans < MIN_BEANS_FOR_ONE_PORTION){
-           printNeedIngredient(beans);
-            return (true);
-        }else if (milk < MIN_MILK_FOR_ONE_PORTION){
-            printNeedIngredient(milk);
-            return (true);
-        }else if (water < MIN_WATER_FOR_ONE_PORTION){
-            printNeedIngredient(water);
-            return (true);
-        }else{
-            return (false);
+    public boolean checkBeansForCappuccino() {
+        if (beans < Cappuccino.BEANS) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkMilkForCappuccino() {
+        if (milk < Cappuccino.MILK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkWaterForCappuccino() {
+        if (water < Cappuccino.WATER) {
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public void addIngredientsToCoffeeMachine(){
-        if (beans < MIN_BEANS_FOR_ONE_PORTION) {
-            beans = VOLUME_FOR_BEANS;
-        }else if (milk < MIN_MILK_FOR_ONE_PORTION) {
-            milk = VOLUME_FOR_MILK;
-        }else if (water < MIN_WATER_FOR_ONE_PORTION) {
-            water = VOLUME_FOR_WATER;
-        }else {
-            System.out.println("Ingredients are enough.");
+    public boolean checkBeansForMocaccino() {
+        if (beans < Mocaccino.BEANS) {
+            return true;
+        } else {
+            return false;
         }
+    }
+    public boolean checkMilkForMocaccino() {
+        if (milk < Mocaccino.MILK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkWaterForMocaccino() {
+        if (water < Mocaccino.WATER) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkBeansForLatte() {
+        if (beans < Latte.BEANS) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkMilkForLatte() {
+        if (milk < Latte.MILK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkWaterForLatte() {
+        if (water < Latte.WATER) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkBeansForEspresso() {
+        if (beans < Espresso.BEANS) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkMilkForEspresso() {
+        if (milk < Espresso.MILK) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkWaterForEspresso() {
+        if (water < Espresso.WATER) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void subtractCappuccino(){
+         beans -= Cappuccino.BEANS;
+         milk -= Cappuccino.MILK;
+         water -= Cappuccino.WATER;
+    }
+    public void subtractMocaccino(){
+        beans -= Mocaccino.BEANS;
+        milk -= Mocaccino.MILK;
+        water -= Mocaccino.WATER;
+    }
+    public void subtractLatte(){
+        beans -= Latte.BEANS;
+        milk -= Latte.MILK;
+        water -= Latte.WATER;
+    }
+    public void subtractEspresso(){
+        beans -= Espresso.BEANS;
+        milk -= Espresso.MILK;
+        water -= Espresso.WATER;
+    }
+
+    public void addBeans() {
+        beans = VOLUME_FOR_BEANS;
+        System.out.println("Beans is enough.");
+    }
+
+    public void addMilk() {
+        milk = VOLUME_FOR_MILK;
+        System.out.println("Milk is enough.");
+    }
+
+    public void addWater() {
+        water = VOLUME_FOR_WATER;
+        System.out.println("Water is enough.");
     }
 
     public void makeCappuccino() throws InterruptedException {
-        if (checkIngredients()) {
-            addIngredientsToCoffeeMachine();
+        if (checkBeansForCappuccino()){
+            printNeedIngredients();
             printLoading2();
-        }else {
-            Cappuccino.deductIngredients();
-            printLoading();
-            System.out.println(beans);
-            System.out.println(milk);
-            System.out.println(water);
+            addBeans();
+        } else if(checkMilkForCappuccino()){
+            printNeedIngredients();
+            printLoading2();
+            addMilk();
+        } else if(checkWaterForCappuccino()){
+            printNeedIngredients();
+            printLoading2();
+            addWater();
+        } else {
+            printLoading(cappuccino);
+            subtractCappuccino();
+            printIngredients();
+        }
     }
+    public void makeMocaccino() throws InterruptedException {
+        if (checkBeansForMocaccino()){
+            printNeedIngredients();
+            printLoading2();
+            addBeans();
+        } else if(checkMilkForMocaccino()){
+            printNeedIngredients();
+            printLoading2();
+            addMilk();
+        } else if(checkWaterForMocaccino()){
+            printNeedIngredients();
+            printLoading2();
+            addWater();
+        } else {
+            printLoading(mocaccino);
+            subtractMocaccino();
+            printIngredients();
+        }
+    }
+    public void makeLatte() throws InterruptedException {
+        if (checkBeansForLatte()){
+            printNeedIngredients();
+            printLoading2();
+            addBeans();
+        } else if(checkMilkForLatte()){
+            printNeedIngredients();
+            printLoading2();
+            addMilk();
+        } else if(checkWaterForLatte()){
+            printNeedIngredients();
+            printLoading2();
+            addWater();
+        } else {
+            printLoading(latte);
+            subtractLatte();
+            printIngredients();
+        }
+    }
+    public void makeEspresso() throws InterruptedException {
+        if (checkBeansForEspresso()){
+            printNeedIngredients();
+            printLoading2();
+            addBeans();
+        } else if(checkMilkForEspresso()){
+            printNeedIngredients();
+            printLoading2();
+            addMilk();
+        } else if(checkWaterForEspresso()){
+            printNeedIngredients();
+            printLoading2();
+            addWater();
+        } else {
+            printLoading(espresso);
+            subtractEspresso();
+            printIngredients();
+        }
     }
 }
